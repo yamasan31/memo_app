@@ -37,7 +37,7 @@ const getBorderColor = (color: NoteColor): string => {
 };
 
 const Note: React.FC<NoteProps> = ({ note }) => {
-  const { togglePin, changeNoteColor, archiveNote, deleteNote, restoreNote, permanentlyDeleteNote, view } = useNotes();
+  const { togglePin, changeNoteColor, archiveNote, deleteNote, restoreNote, permanentlyDeleteNote, view, updateNote } = useNotes();
   const [isColorPickerOpen, setIsColorPickerOpen] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const [editTitle, setEditTitle] = useState(note.title);
@@ -77,10 +77,15 @@ const Note: React.FC<NoteProps> = ({ note }) => {
 
   const saveChanges = () => {
     if (isEditing) {
-      const { updateNote } = useNotes();
       updateNote(note.id, { title: editTitle, content: editContent });
       setIsEditing(false);
     }
+  };
+
+  const handleDelete = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    deleteNote(note.id);
+    setIsEditing(false);
   };
 
   const renderActions = () => {
@@ -207,7 +212,14 @@ const Note: React.FC<NoteProps> = ({ note }) => {
               placeholder="メモを入力..."
               rows={4}
             />
-            <div className="flex justify-end mt-2">
+            <div className="flex justify-between items-center mt-2">
+              <button
+                onClick={handleDelete}
+                className="px-3 py-1 text-sm text-red-600 hover:bg-red-50 rounded-md transition-colors"
+                title="ゴミ箱に移動"
+              >
+                <Trash size={16} />
+              </button>
               <button
                 onClick={(e) => {
                   e.stopPropagation();

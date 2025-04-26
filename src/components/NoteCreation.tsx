@@ -59,7 +59,7 @@ const NoteCreation: React.FC = () => {
   };
 
   return (
-    <div className="w-full max-w-2xl mx-auto mb-8 px-4">
+    <div className="w-full max-w-2xl mx-auto mb-8 px-4 mt-28">
       <form
         ref={formRef}
         className={`bg-white rounded-lg shadow-md transition-all duration-200 ${

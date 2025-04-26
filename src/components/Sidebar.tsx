@@ -36,7 +36,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isSidebarOpen, onCloseSidebar }) => {
       )}
 
       <aside
-        className={`fixed top-16 bottom-0 w-64 bg-white shadow-sm overflow-y-auto z-30 transition-transform duration-300 transform ${
+        className={`fixed top-24 bottom-0 w-64 bg-white shadow-sm overflow-y-auto z-30 transition-transform duration-300 transform ${
           isSidebarOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'
         }`}
       >
