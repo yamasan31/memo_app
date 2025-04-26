@@ -80,7 +80,7 @@ const NoteCreation: React.FC = () => {
         )}
         <textarea
           placeholder={isExpanded ? "メモを入力..." : "メモを作成..."}
-          className={`w-full p-2 resize-none text-gray-700 placeholder-gray-500 focus:outline-none ${
+          className={`w-full p-2 resize-none text-gray-700 placeholder-gray-500 focus:outline-none ml-3 ${
             isExpanded ? 'min-h-[80px]' : 'min-h-[40px]'
           }`}
           rows={isExpanded ? 3 : 1}
@@ -92,7 +92,7 @@ const NoteCreation: React.FC = () => {
           <div className="flex justify-end mt-2">
             <button
               type="submit"
-              className="px-4 py-1.5 text-sm bg-yellow-50 text-yellow-700 hover:bg-yellow-100 rounded-md transition-colors"
+              className="px-4 py-1.5 text-sm bg-blue-50 text-blue-700 hover:bg-blue-100 rounded-md transition-colors"
             >
               作成
             </button>

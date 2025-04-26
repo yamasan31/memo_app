@@ -48,7 +48,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isSidebarOpen, onCloseSidebar }) => {
                   onClick={() => handleViewChange(item.view)}
                   className={`w-full flex items-center py-3 px-4 rounded-full transition-colors ${
                     view === item.view
-                      ? 'bg-yellow-100 text-yellow-800 font-medium'
+                      ? 'bg-blue-100 text-blue-800 font-medium'
                       : 'text-gray-700 hover:bg-gray-100'
                   }`}
                 >

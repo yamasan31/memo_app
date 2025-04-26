@@ -215,7 +215,7 @@ const Note: React.FC<NoteProps> = ({ note }) => {
             <div className="flex justify-between items-center mt-2">
               <button
                 onClick={handleDelete}
-                className="px-3 py-1 text-sm text-red-600 hover:bg-red-50 rounded-md transition-colors"
+                className="px-3 py-1 text-sm text-gray-500 hover:bg-red-50 rounded-md transition-colors"
                 title="ゴミ箱に移動"
               >
                 <Trash size={16} />
@@ -225,7 +225,7 @@ const Note: React.FC<NoteProps> = ({ note }) => {
                   e.stopPropagation();
                   saveChanges();
                 }}
-                className="px-3 py-1 text-sm bg-yellow-500 text-white rounded-md"
+                className="px-3 py-1 text-sm bg-blue-500 text-white rounded-md"
               >
                 保存
               </button>

@@ -19,21 +19,21 @@ const Header: React.FC = () => {
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 h-24 bg-white shadow-sm flex items-center px-4 z-10">
-      <div className="flex items-center w-full max-w-7xl mx-auto justify-start gap-6">
+    <header className="fixed top-0 left-0 right-0 h-24 bg-white shadow-sm flex items-center z-10">
+      <div className="flex items-center w-full pl-2 justify-start gap-3">
         <div className="flex items-center flex-shrink-0">
-          <a href="/" className="text-3xl font-bold text-gray-800 flex items-center">
-            <span className="text-yellow-500">My</span>
+          <a href="/" className="text-3xl font-bold text-gray-800 flex items-center ml-12">
+            <span className="text-blue-800">My</span>
             <span className="ml-1">Note</span>
           </a>
         </div>
 
         <div
-          className={`flex items-center w-full max-w-md px-5 py-3 rounded-lg ${
+          className={`flex items-center flex-1 max-w-2xl mx-8 px-5 py-3 rounded-lg ml-12 ${
             isSearchFocused ? 'bg-white shadow-md' : 'bg-gray-100'
           } transition-all duration-200`}
         >
-          <Search size={20} className="text-gray-500 mr-3" />
+          <Search size={16} className="text-gray-500 mr-3" />
           <input
             type="text"
             placeholder="メモを検索"
@@ -53,8 +53,8 @@ const Header: React.FC = () => {
           )}
         </div>
 
-        <div className="flex-grow">
-          {/* 右側の余白部分 */}
+        <div>
+
         </div>
       </div>
     </header>
