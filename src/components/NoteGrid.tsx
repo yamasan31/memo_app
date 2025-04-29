@@ -90,7 +90,7 @@ const NoteGrid: React.FC = () => {
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-8">
                 {pinnedNotes.map(note => (
-                  <div></div>
+                  <div><Note key={note.id} note={note} /></div>
                 ))}
               </div>
             </>
@@ -105,7 +105,7 @@ const NoteGrid: React.FC = () => {
               )}
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                 {unpinnedNotes.map(note => (
-                  <div></div>
+                  <div><Note key={note.id} note={note} /></div>
                 ))}
               </div>
             </>
