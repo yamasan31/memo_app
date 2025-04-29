@@ -27,7 +27,7 @@ function App() {
             <Menu size={24} />
           </button>
           
-          <Sidebar isSidebarOpen={isSidebarOpen} onCloseSidebar={() => setIsSidebarOpen(false)} />
+          <Sidebar isSidebarOpen={false} onCloseSidebar={() => {}} />
           
           <main className="flex-1 md:ml-64 p-4 pt-6">
             <div className="max-w-6xl mx-auto">
