@@ -1,4 +1,4 @@
-export interface memo {
+export interface todo {
     title: string;
     context: string;
   }

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Menu } from 'lucide-react';
+import { supabase } from './lib/supabaseClient'
 import { NoteProvider } from './contexts/NoteContext';
 import Header from './components/Header';
 import Sidebar from './components/Sidebar';
