@@ -3,6 +3,8 @@ import { useNotes } from '../contexts/NoteContext';
 import Note from './Note';
 import { Note as NoteType } from '../types';
 
+
+
 const NoteGrid: React.FC = () => {
   const { notes, view, searchQuery } = useNotes();
 
@@ -38,6 +40,7 @@ const NoteGrid: React.FC = () => {
   };
 
   const filteredNotes = filterNotes(notes);
+  
   
   // Separate pinned and unpinned notes (only in notes view)
   const pinnedNotes = view === 'notes' 
@@ -90,7 +93,7 @@ const NoteGrid: React.FC = () => {
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-8">
                 {pinnedNotes.map(note => (
-                  <div><Note key={note.id} note={note} /></div>
+                  <div key={note.id}><Note note={note} /></div>
                 ))}
               </div>
             </>
@@ -105,7 +108,7 @@ const NoteGrid: React.FC = () => {
               )}
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                 {unpinnedNotes.map(note => (
-                  <div><Note key={note.id} note={note} /></div>
+                  <div key={note.id}><Note note={note} /></div>
                 ))}
               </div>
             </>

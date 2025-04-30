@@ -9,6 +9,8 @@ const NoteCreation: React.FC = () => {
   const formRef = useRef<HTMLFormElement>(null);
   const titleInputRef = useRef<HTMLInputElement>(null);
 
+
+  
   useEffect(() => {
     // Handle clicks outside the form to collapse it if empty
     const handleClickOutside = (event: MouseEvent) => {

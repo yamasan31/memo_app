@@ -6,6 +6,7 @@ import Sidebar from './components/Sidebar';
 import NoteCreation from './components/NoteCreation';
 import NoteGrid from './components/NoteGrid';
 
+
 function App() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
