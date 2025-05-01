@@ -8,8 +8,20 @@ import NoteCreation from './components/NoteCreation';
 import NoteGrid from './components/NoteGrid';
 
 
+
 function App() {
+    const [todos, setTodos] = useState<any>([]);
+  const [title, setTitle] = useState<string>("");
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  
+  useEffect(() => {
+    const getTodos = async () => {
+      const todos = await getAllTodos();
+      setTodos(todos);
+      console.log(todos);
+    };
+    getTodos();
+  }, []);
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
