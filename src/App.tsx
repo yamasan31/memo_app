@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Menu } from 'lucide-react';
 import { supabase } from './lib/supabaseClient'
 import { NoteProvider } from './contexts/NoteContext';
@@ -6,21 +6,21 @@ import Header from './components/Header';
 import Sidebar from './components/Sidebar';
 import NoteCreation from './components/NoteCreation';
 import NoteGrid from './components/NoteGrid';
-
+import { getAllTodos } from './utils/supabaseFunctions';
 
 
 function App() {
-    const [todos, setTodos] = useState<any>([]);
+  const [todos, setTodos] = useState<any>([]);
   const [title, setTitle] = useState<string>("");
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   
   useEffect(() => {
-    const getTodos = async () => {
+    const fetchTodos = async () => {
       const todos = await getAllTodos();
       setTodos(todos);
       console.log(todos);
     };
-    getTodos();
+    fetchTodos();
   }, []);
 
   const toggleSidebar = () => {
