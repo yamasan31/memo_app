@@ -1,25 +1,14 @@
-import React, { useState, useEffect } from 'react';
-import { Menu } from 'lucide-react';
-import { NoteProvider } from './contexts/NoteContext';
-import Header from './components/Header';
-import Sidebar from './components/Sidebar';
-import NoteCreation from './components/NoteCreation';
-import NoteGrid from './components/NoteGrid';
-import { getAllTodos } from './utils/supabaseFunctions';
-
+import React, { useState } from "react";
+import { Menu } from "lucide-react";
+import { supabase } from "./lib/supabaseClient";
+import { NoteProvider } from "./contexts/NoteContext";
+import Header from "./components/Header";
+import Sidebar from "./components/Sidebar";
+import NoteCreation from "./components/NoteCreation";
+import NoteGrid from "./components/NoteGrid";
 
 function App() {
-  const [todos, setTodos] = useState<any>([]);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  
-  useEffect(() => {
-    const getTodos = async () => {
-      const todos = await getAllTodos();
-      setTodos(todos);
-      console.log(todos);
-    };
-    getTodos();
-  }, []);
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
@@ -29,7 +18,7 @@ function App() {
     <NoteProvider>
       <div className="min-h-screen bg-gray-100">
         <Header />
-        
+
         <div className="flex pt-16">
           {/* Mobile menu button */}
           <button
@@ -38,9 +27,9 @@ function App() {
           >
             <Menu size={24} />
           </button>
-          
+
           <Sidebar isSidebarOpen={false} onCloseSidebar={() => {}} />
-          
+
           <main className="flex-1 md:ml-64 p-4 pt-6">
             <div className="max-w-6xl mx-auto">
               <NoteCreation />

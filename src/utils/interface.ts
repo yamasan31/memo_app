@@ -1,4 +1,4 @@
 export interface todo {
-    title: string;
-    context: string;
-  }
+  title: string;
+  context: string;
+}
