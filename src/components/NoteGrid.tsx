@@ -1,24 +1,42 @@
-import React from 'react';
-import { useNotes } from '../contexts/NoteContext';
-import Note from './Note';
-import { Note as NoteType } from '../types';
-
-
+import React, { useState, useEffect } from "react";
+import { useNotes } from "../contexts/NoteContext";
+import Note from "./Note";
+import { Note as NoteType } from "../types";
+import { getAllTodos } from "../utils/supabaseFunctions";
 
 const NoteGrid: React.FC = () => {
-  const { notes, view, searchQuery } = useNotes();
+  const { notes, view, searchQuery, addNote } = useNotes();
+  useEffect(() => {
+    const getTodos = async () => {
+      const todos = await getAllTodos();
+      if (todos) {
+        console.log(todos);
+        if(notes.length === 0) {
+
+        todos.forEach((todo) => {
+          addNote(todo.title, todo.content);
+        })
+        }
+      }
+    };
+    console.log(notes.length);
+    
+    if(notes.length === 0) {
+      getTodos();
+    }
+  }, []);
 
   const filterNotes = (notes: NoteType[]): NoteType[] => {
     // Filter based on view
-    let filteredNotes = notes.filter(note => {
+    let filteredNotes = notes.filter((note) => {
       switch (view) {
-        case 'notes':
+        case "notes":
           return !note.isArchived && !note.isDeleted;
-        case 'archive':
+        case "archive":
           return note.isArchived && !note.isDeleted;
-        case 'trash':
+        case "trash":
           return note.isDeleted;
-        case 'labels':
+        case "labels":
           // In a real app, we would filter by labels here
           return !note.isArchived && !note.isDeleted;
         default:
@@ -30,7 +48,7 @@ const NoteGrid: React.FC = () => {
     if (searchQuery) {
       const query = searchQuery.toLowerCase();
       filteredNotes = filteredNotes.filter(
-        note =>
+        (note) =>
           note.title.toLowerCase().includes(query) ||
           note.content.toLowerCase().includes(query)
       );
@@ -40,37 +58,36 @@ const NoteGrid: React.FC = () => {
   };
 
   const filteredNotes = filterNotes(notes);
-  
-  
+
   // Separate pinned and unpinned notes (only in notes view)
-  const pinnedNotes = view === 'notes' 
-    ? filteredNotes.filter(note => note.isPinned)
-    : [];
-  
-  const unpinnedNotes = view === 'notes'
-    ? filteredNotes.filter(note => !note.isPinned)
-    : filteredNotes;
+  const pinnedNotes =
+    view === "notes" ? filteredNotes.filter((note) => note.isPinned) : [];
+
+  const unpinnedNotes =
+    view === "notes"
+      ? filteredNotes.filter((note) => !note.isPinned)
+      : filteredNotes;
 
   // Show appropriate message when no notes are found
   const renderEmptyState = () => {
-    let message = '';
+    let message = "";
     switch (view) {
-      case 'notes':
-        message = searchQuery 
-          ? '検索結果はありません'
-          : 'メモはありません。新しいメモを作成してください。';
+      case "notes":
+        message = searchQuery
+          ? "検索結果はありません"
+          : "メモはありません。新しいメモを作成してください。";
         break;
-      case 'archive':
-        message = 'アーカイブされたメモはありません';
+      case "archive":
+        message = "アーカイブされたメモはありません";
         break;
-      case 'trash':
-        message = 'ゴミ箱は空です';
+      case "trash":
+        message = "ゴミ箱は空です";
         break;
-      case 'labels':
-        message = 'ラベル付きのメモはありません';
+      case "labels":
+        message = "ラベル付きのメモはありません";
         break;
       default:
-        message = 'メモはありません';
+        message = "メモはありません";
     }
 
     return (
@@ -92,8 +109,10 @@ const NoteGrid: React.FC = () => {
                 ピン留めされたメモ
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-8">
-                {pinnedNotes.map(note => (
-                  <div key={note.id}><Note note={note} /></div>
+                {pinnedNotes.map((note,i) => (
+                  <div key={i}>
+                    <Note note={note} />
+                  </div>
                 ))}
               </div>
             </>
@@ -107,8 +126,10 @@ const NoteGrid: React.FC = () => {
                 </div>
               )}
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                {unpinnedNotes.map(note => (
-                  <div key={note.id}><Note note={note} /></div>
+                {unpinnedNotes.map((note,i) => (
+                  <div key={i}>
+                    <Note note={note} />
+                  </div>
                 ))}
               </div>
             </>
