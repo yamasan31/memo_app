@@ -1,29 +1,20 @@
-import React, { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { useNotes } from "../contexts/NoteContext";
 import Note from "./Note";
 import { Note as NoteType } from "../types";
 import { getAllTodos } from "../utils/supabaseFunctions";
 
 const NoteGrid: React.FC = () => {
-  const { notes, view, searchQuery, addNote } = useNotes();
+  const { notes, view, searchQuery, replaceNotes } = useNotes();
   useEffect(() => {
     const getTodos = async () => {
       const todos = await getAllTodos();
-      if (todos) {
-        console.log(todos);
-        if(notes.length === 0) {
 
-        todos.forEach((todo) => {
-          addNote(todo.title, todo.content);
-        })
-        }
-      }
+      console.log(todos);
+      // getAllTodosの返り値の型定義していないので型エラーが発生中
+      replaceNotes(todos);
     };
-    console.log(notes.length);
-    
-    if(notes.length === 0) {
-      getTodos();
-    }
+    getTodos();
   }, []);
 
   const filterNotes = (notes: NoteType[]): NoteType[] => {
