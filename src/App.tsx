@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Menu } from "lucide-react";
 import { NoteProvider,  } from "./contexts/NoteContext";
 import Header from "./components/Header";

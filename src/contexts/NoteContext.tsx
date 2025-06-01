@@ -1,5 +1,7 @@
-import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { Note, View, NoteColor } from '../types';
+import {addTodo} from "../utils/supabaseFunctions.ts";
+import note from "../components/Note.tsx";
 
 interface NoteContextType {
   notes: Note[];
@@ -12,6 +14,7 @@ interface NoteContextType {
   deleteNote: (id: string) => void;
   archiveNote: (id: string) => void;
   restoreNote: (id: string) => void;
+  replaceNotes: (notes: Note[]) => void;
   permanentlyDeleteNote: (id: string) => void;
   togglePin: (id: string) => void;
   changeNoteColor: (id: string, color: NoteColor) => void;
@@ -82,6 +85,8 @@ export const NoteProvider: React.FC<NoteProviderProps> = ({ children }) => {
     };
     
     setNotes(prevNotes => [newNote, ...prevNotes]);
+
+    addTodo(title);
   };
 
   const updateNote = (id: string, data: Partial<Note>) => {
@@ -124,6 +129,10 @@ export const NoteProvider: React.FC<NoteProviderProps> = ({ children }) => {
     );
   };
 
+  const replaceNotes = (notes: Note[]) => {
+    setNotes(notes);
+  };
+
   const permanentlyDeleteNote = (id: string) => {
     setNotes(prevNotes => prevNotes.filter(note => note.id !== id));
   };
@@ -161,6 +170,7 @@ export const NoteProvider: React.FC<NoteProviderProps> = ({ children }) => {
         deleteNote,
         archiveNote,
         restoreNote,
+        replaceNotes,
         permanentlyDeleteNote,
         togglePin,
         changeNoteColor,
